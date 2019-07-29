@@ -2,7 +2,7 @@ package com.tushar.foodrecipesmvvm.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.tushar.foodrecipesmvvm.remote.ServiceGenerator
+import com.tushar.foodrecipesmvvm.remote.ApiInterface
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
@@ -26,8 +26,15 @@ class RecipesRepository {
     fun getRecipes(pageNo: String) {
         mPageNo = pageNo.toInt()
         scope.launch {
-            val response = ServiceGenerator.invoke().getRecipesAsync(mPageNo.toString()).await()
-            recipeLiveData.postValue(response)
+            try{
+                withContext(Dispatchers.IO){
+                    val response = ApiInterface.invoke().getRecipesAsync(mPageNo.toString()).await()
+                    recipeLiveData.postValue(response)
+                }
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+
         }
     }
 

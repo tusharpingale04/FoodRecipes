@@ -19,6 +19,7 @@ import com.tushar.foodrecipesmvvm.databinding.ActivityMainBinding
 import com.tushar.foodrecipesmvvm.model.Recipe
 import com.tushar.foodrecipesmvvm.viewmodel.RecipesViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MainActivity : AppCompatActivity(), RecipesAdapter.OnRecipeSelectedListener {
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity(), RecipesAdapter.OnRecipeSelectedListene
     override fun onClickRecipe(recipeUrl: String) {
 
         val builder = CustomTabsIntent.Builder()
-        builder.setToolbarColor(ContextCompat.getColor(this, R.color.colorAccent))
+        builder.setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary))
         builder.addDefaultShareMenuItem()
 
         val anotherCustomTab = CustomTabsIntent.Builder().build()
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity(), RecipesAdapter.OnRecipeSelectedListene
 
     }
 
-    private lateinit var recipesViewModel: RecipesViewModel
+    val recipesViewModel: RecipesViewModel by viewModel()
     private var recipes: MutableList<Recipe> = ArrayList()
     private lateinit var recipesAdapter: RecipesAdapter
     private lateinit var activityMainBinding: ActivityMainBinding
@@ -57,7 +58,6 @@ class MainActivity : AppCompatActivity(), RecipesAdapter.OnRecipeSelectedListene
         super.onCreate(savedInstanceState)
 
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        recipesViewModel = ViewModelProviders.of(this).get(RecipesViewModel::class.java)
         activityMainBinding.viewmodel = recipesViewModel
 
         recipesViewModel.getRecipes("1")

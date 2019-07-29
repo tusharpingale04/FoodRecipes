@@ -9,9 +9,9 @@ import com.tushar.foodrecipesmvvm.model.RecipesRepository
 
 class RecipesViewModel(application: Application) : AndroidViewModel(application) {
 
-    private var recipesLiveData: LiveData<Recipes>
-    private var recipesRepository: RecipesRepository = RecipesRepository()
-    var isPerformingNetworkCall: ObservableBoolean = ObservableBoolean(false)
+    private val recipesLiveData: LiveData<Recipes>
+    private val recipesRepository: RecipesRepository = RecipesRepository()
+    val isPerformingNetworkCall: ObservableBoolean = ObservableBoolean(false)
 
     init {
         recipesLiveData = recipesRepository.getRecipesLiveData()

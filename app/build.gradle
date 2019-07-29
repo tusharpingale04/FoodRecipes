@@ -28,6 +28,7 @@ android {
 }
 
 dependencies {
+    def koin_version = '2.0.1'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.0.2'
@@ -45,8 +46,8 @@ dependencies {
     implementation "com.google.code.gson:gson:2.8.5"
 
     // Kotlin Android Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.0'
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -68,8 +69,17 @@ dependencies {
     //Custom Tabs
     implementation "androidx.browser:browser:1.0.0"
 
+    //Koin
+    implementation "org.koin:koin-android:$koin_version"
+
+    // Koin AndroidX Scope features
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+
+    // Koin AndroidX ViewModel features
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0-beta01'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-beta01'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.cardview:cardview:1.0.0'
 }
